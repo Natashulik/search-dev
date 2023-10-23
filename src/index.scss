@@ -155,11 +155,10 @@ body {
     padding: 15px 12px 15px;
   }
 
-  @media(max-width: 500px) {
-      grid-template-columns: 60px 1fr;
-      gap: 5px 5px;
-  
-  }
+   @media(max-width: 500px) {
+    display: flex;
+    flex-direction: column;
+   }
 }
 
 .user_title {
@@ -180,6 +179,9 @@ body {
   @media(max-width: 600px) {
     margin-bottom: 15px;
   }
+}
+.user_title_item.name {
+  align-self: center;
 }
 
 .info_title.empty,
@@ -205,6 +207,7 @@ body {
    }
 
    @media(max-width: 600px) {
+     margin-bottom: 5px;
     display: flex;
     justify-content: space-between;
    }
@@ -226,9 +229,12 @@ body {
   }
 
   @media(max-width: 500px) {
-    max-width: 70%;
+    max-width: 30%;
+    align-self: center;
     }
-  }
+
+
+   }
 
 .user_info {
   background-color: $light-theme-color;
@@ -249,11 +255,15 @@ body {
 a {
   color: black;
 }
-
-.info_item a:hover {
-  color: $color-orange;
+.info_item  {
+  margin-bottom: 5px;
+  
+  & a:hover {
+    color: $color-orange;
+  }
 }
 
+  
 .repos_container,
 .followers_container,
 .following_container {
@@ -264,6 +274,10 @@ a {
     box-shadow: $shadow;     
     border-radius: $radius;
     position: relative;
+   
+    @media(max-width: 600px)  {
+      padding: 40px 2%;
+    }
 }
 
 .repos_item {
@@ -368,7 +382,7 @@ a {
   }
 }
 
-.follower_item {
+.following_item {
     padding: 10px 15px;
     margin: 4px 10px;
     background-color: $light-theme-color;
