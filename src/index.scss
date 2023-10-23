@@ -1,0 +1,464 @@
+// Variables---------------------------------------
+$light-theme-color: rgb(255, 245, 237);
+$dark-theme-color: rgb(96, 87, 83);
+$gray-color:  rgb(150, 150, 150);
+$color-empty: rgb(166, 166, 166);
+$color-orange: rgb(250, 107, 5);
+
+$full-width: 100%;
+$radius: 15px;
+$small-radius: 10px;
+$shadow:  0 0 0 2px rgb(255, 255, 255),
+          0.3em 0.3em 1em rgba(0, 0, 0, 0.2);
+
+//Extends and mixins-------------------------------
+%flex-between-start {
+  display: flex;
+  justify-content: space-between;
+}
+
+%flex-between-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+%dark-border  {
+  background-color: rgb(149, 137, 127);
+  box-shadow:
+      0 0 0 3px rgba(251, 198, 152, 0.5),
+      0.3em 0.3em 1em rgba(217, 127, 18, 0.2);
+}
+
+@mixin fill-color($color) {
+ color: $color;
+ fill: $color
+}
+// Styles-------------------------------------
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  font-family: 'Space Mono', monospace;
+  font-weight: 400;
+  background-color: $light-theme-color;
+}
+
+.container {
+  max-width: 820px;
+  min-height: 700px;
+  margin: 20px auto;
+}
+
+.header {
+  width: $full-width;
+  height: 50px;
+  @extend %flex-between-center;
+ 
+  .header_title {
+    margin-left: 5px;
+}
+}
+
+.theme_name {
+  margin-right: 10px;
+  color: $gray-color;
+}
+
+.theme_icon {
+  fill: $gray-color;
+}
+
+.search {
+  width: $full-width;
+  height: 75px;
+  position: relative;
+  overflow: hidden;
+  padding: 10px 10px 10px 16px;
+  background-color: white;
+  box-shadow: $shadow;
+  margin: 20px 0;
+  border-radius: $radius;
+  display: flex;
+  align-items: center;
+}
+
+.label {
+  cursor: pointer;
+}
+
+.input {
+  padding: 0 10px;
+  flex-grow: 1;
+  height: 60px;
+  max-width: calc(100% - 100px - 20px);
+  border: none;
+  font-size: 20px;
+  line-height: 1.5;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::placeholder {
+    color: lightgray;
+}
+}
+
+.search_icon {
+  fill: $gray-color;
+}
+
+.button {
+  padding: 10px 22px;
+  border-radius: $small-radius;
+  border: none;
+  background-color: rgb(255, 178, 110);
+  color: rgb(30, 18, 18);
+  font-size: 1rem;
+  line-height: 1.5;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgb(255, 199, 134);
+}
+
+}
+
+.error {
+  margin-right: 15px;
+  font-size: 18px;
+  font-weight: 600;
+  color: rgb(211, 66, 4);
+}
+
+.user_card {
+  width: $full-width;
+  padding: 30px 24px 40px;
+  background-color: white;
+  box-shadow: $shadow;     
+  border-radius: $radius;
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 25px 25px;
+  
+  &>*:nth-child(n + 2) {
+    grid-column: 2 / span 1;
+  }
+
+  @media(max-width: 600px) {
+    grid-template-columns: 80px 1fr;
+    gap: 10px 10px;
+    padding: 15px 12px 15px;
+  }
+
+  @media(max-width: 500px) {
+      grid-template-columns: 60px 1fr;
+      gap: 5px 5px;
+  
+  }
+}
+
+.user_title {
+  display: grid;
+  grid-template-columns: 1fr 105px;
+
+  body[data-theme="dark"] & {
+    color: white;
+  }
+
+  @media(max-width: 600px) {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.user_title_item  {
+  @media(max-width: 600px) {
+    margin-bottom: 15px;
+  }
+}
+
+.info_title.empty,
+.info_number.empty {
+  color: $color-empty;
+}
+
+.statistic {
+  background-color: $light-theme-color;
+  padding: 15px 32px;
+  border-radius: $small-radius;
+  @extend %flex-between-start;
+
+    @media(max-width: 600px) {
+    flex-direction: column;
+   }
+}
+
+.statistic_info {
+  &:hover {
+    color: $color-orange;
+    font-weight: 600;
+   }
+
+   @media(max-width: 600px) {
+    display: flex;
+    justify-content: space-between;
+   }
+}
+
+.info_item {
+  @media(max-width: 600px) {
+  display: flex;
+  justify-content: space-between;
+  }
+}
+
+.avatar {
+  max-width: 120px;
+  border-radius: 50%;
+
+  @media(max-width: 600px)  {
+    max-width: 80%;
+  }
+
+  @media(max-width: 500px) {
+    max-width: 70%;
+    }
+  }
+
+.user_info {
+  background-color: $light-theme-color;
+  padding: 15px 32px;
+  border-radius: $small-radius;
+  @extend %flex-between-start;
+
+  .info_item.empty {
+    fill: $color-empty;
+    color:$color-empty;     
+  }
+
+  @media(max-width: 600px) {
+    flex-direction: column;
+  }
+}
+
+a {
+  color: black;
+}
+
+.info_item a:hover {
+  color: $color-orange;
+}
+
+.repos_container,
+.followers_container,
+.following_container {
+    margin: 20px auto;
+    width: $full-width;
+    padding: 40px 5%;
+    background-color: white;
+    box-shadow: $shadow;     
+    border-radius: $radius;
+    position: relative;
+}
+
+.repos_item {
+  padding: 15px 0;
+  margin: 0 10px;
+  border-top: 2px solid rgba(173, 168, 168, 0.5);
+}
+
+.repos_main_title,
+.followers_main_title,
+.followings_main_title {
+    padding: 15px 0;
+    text-align: center;
+}
+
+.repos_info {
+ @extend %flex-between-start;
+
+ .repos_status {
+  border: 2px solid rgba(173, 168, 168, 0.5);
+  padding: 2px 5px;
+  border-radius: $radius;
+  }
+}
+
+.repos_link {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: $full-width;
+  white-space: nowrap;
+  display: inline-block;
+    
+  &:hover {
+    color: $color-orange;
+  }
+}
+
+.close_icon {
+  position: absolute;
+  margin-left: 90%;
+  margin-top: -80px;
+  fill: gray;
+
+  &:hover {
+    fill: $color-orange;
+  }
+
+  @media(max-width: 700px) {
+    margin-left: 88%;
+  }
+  @media(max-width: 500px) {
+    margin-left: 85%;
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+
+  to {
+      opacity: 1;
+  }
+}
+
+.fade-out {
+  opacity: 1;
+  animation: fadeOut 0.5s forwards;
+}
+
+@keyframes fadeOut {
+  from {
+      opacity: 1;
+  }
+
+  to {
+      opacity: 0;
+  }
+}
+
+.follower_item {
+    padding: 10px 15px;
+    margin: 4px 10px;
+    background-color: $light-theme-color;
+    border-radius: $radius;
+    @extend %flex-between-center;
+
+  .follower_link:hover  {
+    color: $color-orange;
+  }
+  .follower_avatar {
+    max-width: 70px;
+    border-radius: 50%;
+
+    @media(max-width: 700px) {
+      max-width: 10%;
+    }
+  }
+}
+
+.follower_item {
+    padding: 10px 15px;
+    margin: 4px 10px;
+    background-color: $light-theme-color;
+    border-radius: $radius;
+    @extend %flex-between-center;
+   
+    .following_link:hover {
+    color: $color-orange;
+  }
+    .following_avatar {
+    max-width: 70px;
+    border-radius: 50%;
+    @media(max-width: 700px) {
+      max-width: 10%;
+    }
+
+  }
+}
+
+body[data-theme="dark"] {
+  background-color: $dark-theme-color;
+}
+
+/*dark theme*/
+body[data-theme="dark"] .header,
+body[data-theme="dark"] .theme_name,
+body[data-theme="dark"] .theme_icon,
+body[data-theme="dark"] .error,
+body[data-theme="dark"] .repos_link:hover,
+body[data-theme="dark"] .close_icon:hover,
+body[data-theme="dark"] .follower_link:hover,
+body[data-theme="dark"] .following_link:hover,
+body[data-theme="dark"] .info_item .link:hover {
+  @include fill-color(rgb(254, 129, 4));
+ }
+
+body[data-theme="dark"] .search,
+body[data-theme="dark"] .user_card,
+body[data-theme="dark"] .repos_container,
+body[data-theme="dark"] .followers_container,
+body[data-theme="dark"] .following_container {
+  @extend %dark-border;
+}
+
+body[data-theme="dark"] .repos_item,
+body[data-theme="dark"] .repos_status {
+    border-top: 2px solid rgba(251, 198, 152, 0.5);
+}
+
+body[data-theme="dark"] .input,
+body[data-theme="dark"] .repos_container {
+    background-color: rgb(149, 137, 127);
+    color: white;
+}
+
+body[data-theme="dark"] .info,
+body[data-theme="dark"] .input::placeholder,
+body[data-theme="dark"] .search_icon,
+body[data-theme="dark"] .close_icon,
+body[data-theme="dark"] .followers_main_title,
+body[data-theme="dark"] .followings_main_title,
+body[data-theme="dark"] .follower_link,
+body[data-theme="dark"] .following_link,
+body[data-theme="dark"] .info_item .link {
+  @include fill-color(white);
+}
+
+body[data-theme="dark"] .statistic,
+body[data-theme="dark"] .user_info,
+body[data-theme="dark"] .follower_item,
+body[data-theme="dark"] .following_item {
+    background-color: $dark-theme-color;
+    @include fill-color(white);
+}
+
+body[data-theme="dark"] .button {
+  color: rgb(74, 66, 63);
+  &:hover {
+    background-color: rgb(255, 150, 59);
+  }}
+
+  body[data-theme="dark"] .repos_link {
+    color: black;
+}
+
+
+
+
+
+
+
+
+
